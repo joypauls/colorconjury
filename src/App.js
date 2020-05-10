@@ -52,7 +52,7 @@ const theme = {
 
 function MadeWithLove() {
   return (
-    <Text align="center">
+    <Text align="center" size="small">
       {'made with ❤ by '}
       joypauls
     </Text>
@@ -67,7 +67,7 @@ function PaletteElement(props) {
       <SliderInput value={props.color.g} setValue={props.color.setG} />
       <SliderInput value={props.color.b} setValue={props.color.setB} />
       <Box elevation="medium" background={makeRGBString(props.color.r, props.color.g, props.color.b)} width="medium" height="medium">
-        <Text>{ props.color.r }, { props.color.g }, { props.color.b }</Text>
+        <Text size="small">({ props.color.r }, { props.color.g }, { props.color.b })</Text>
       </Box>
     </Box>
   )
@@ -138,21 +138,21 @@ const AppBar = (props) => (
 function App() {
   const [showSidebar, setShowSidebar] = useState(false);
 
-  const [valueR, setValueR] = useState(10);
-  const [valueG, setValueG] = useState(10);
-  const [valueB, setValueB] = useState(10);
+  const [valueR, setValueR] = useState(150);
+  const [valueG, setValueG] = useState(50);
+  const [valueB, setValueB] = useState(228);
 
   const color1 = new Color(valueR, valueG, valueB, setValueR, setValueG, setValueB);
 
-  const [valueR2, setValueR2] = useState(10);
-  const [valueG2, setValueG2] = useState(10);
-  const [valueB2, setValueB2] = useState(10);
+  const [valueR2, setValueR2] = useState(146);
+  const [valueG2, setValueG2] = useState(255);
+  const [valueB2, setValueB2] = useState(217);
 
   const color2 = new Color(valueR2, valueG2, valueB2, setValueR2, setValueG2, setValueB2);
 
-  const [valueR3, setValueR3] = useState(10);
-  const [valueG3, setValueG3] = useState(10);
-  const [valueB3, setValueB3] = useState(10);
+  const [valueR3, setValueR3] = useState(255);
+  const [valueG3, setValueG3] = useState(169);
+  const [valueB3, setValueB3] = useState(238);
 
   const color3 = new Color(valueR3, valueG3, valueB3, setValueR3, setValueG3, setValueB3);
 
@@ -163,7 +163,7 @@ function App() {
         {size => (
           <Box fill>
             <AppBar>
-              <Heading level='3' margin='none'>color & conjury &#10024; &#128142; &#128302;</Heading>
+              <Heading level='4' margin='none'>color & conjury &#128302;</Heading>
               <Button
                 icon={<Configure />}
                 onClick={() => setShowSidebar(!showSidebar)}
