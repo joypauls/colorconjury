@@ -26,7 +26,7 @@ import Slider from "rc-slider";
 const theme = {
   global: {
     colors: {
-      brand: '#228BE6',
+      brand: '#FFFFFF',
     },
     font: {
       family: 'DM Mono',
@@ -45,7 +45,7 @@ function MadeWithLove() {
   );
 }
 
-function Palette() {
+function Palette(props) {
   return (
     <Grid
       columns={{
@@ -54,7 +54,7 @@ function Palette() {
       }}
       gap="small"
     >
-      <Box elevation="medium" background="brand" width="medium" height="medium">Item 1</Box>
+      <Box elevation="medium" background={makeRGBString(props.r, props.g, props.b)} width="medium" height="medium">Item 1</Box>
       <Box elevation="medium" background="brand" width="medium" height="medium">Item 2</Box>
       <Box elevation="medium" background="brand" width="medium" height="medium">Item 3</Box>
     </Grid>
@@ -64,9 +64,17 @@ function Palette() {
 function SliderInput(props) {
   return (
     <RangeInput
+      min={0}
+      max={255}
       value={props.value}
       onChange={event => props.setValue(event.target.value)}
     />
+  );
+}
+
+function makeRGBString(r, g, b) {
+  return (
+    `rgb(${r},${g},${b})`
   );
 }
 
@@ -106,7 +114,7 @@ function App() {
     <Box direction='row' flex overflow={{ horizontal: 'hidden' }}>
       <Box flex align='center' justify='center'>
       <Text>{ valueR }, { valueG }, { valueB }</Text>
-        <Palette/>
+        <Palette r={valueR} g={valueG} b={valueB} />
       </Box>
         <Collapsible direction="horizontal" open={showSidebar}>
            <Box
