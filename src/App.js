@@ -63,10 +63,12 @@ function MadeWithLove() {
 function PaletteElement(props) {
   return (
     <Box>
-      <SliderInput value={props.color1.r} setValue={props.color1.setR} />
-      <SliderInput value={props.color1.g} setValue={props.color1.setG} />
-      <SliderInput value={props.color1.b} setValue={props.color1.setB} />
-      <Box elevation="medium" background={makeRGBString(props.color1.r, props.color1.g, props.color1.b)} width="medium" height="medium">Item 1</Box>
+      <SliderInput value={props.color.r} setValue={props.color.setR} />
+      <SliderInput value={props.color.g} setValue={props.color.setG} />
+      <SliderInput value={props.color.b} setValue={props.color.setB} />
+      <Box elevation="medium" background={makeRGBString(props.color.r, props.color.g, props.color.b)} width="medium" height="medium">
+        <Text>{ props.color.r }, { props.color.g }, { props.color.b }</Text>
+      </Box>
     </Box>
   )
 }
@@ -80,9 +82,9 @@ function Palette(props) {
       }}
       gap="small"
     >
-      <PaletteElement {...props} />
-      <Box elevation="medium" background="brand" width="medium" height="medium">Item 2</Box>
-      <Box elevation="medium" background="brand" width="medium" height="medium">Item 3</Box>
+      <PaletteElement color={props.color1} />
+      <PaletteElement color={props.color2} />
+      <PaletteElement color={props.color3} />
     </Grid>
   )
 }
@@ -132,6 +134,7 @@ const AppBar = (props) => (
   />
 );
 
+
 function App() {
   const [showSidebar, setShowSidebar] = useState(false);
 
@@ -140,6 +143,18 @@ function App() {
   const [valueB, setValueB] = useState(10);
 
   const color1 = new Color(valueR, valueG, valueB, setValueR, setValueG, setValueB);
+
+  const [valueR2, setValueR2] = useState(10);
+  const [valueG2, setValueG2] = useState(10);
+  const [valueB2, setValueB2] = useState(10);
+
+  const color2 = new Color(valueR2, valueG2, valueB2, setValueR2, setValueG2, setValueB2);
+
+  const [valueR3, setValueR3] = useState(10);
+  const [valueG3, setValueG3] = useState(10);
+  const [valueB3, setValueB3] = useState(10);
+
+  const color3 = new Color(valueR3, valueG3, valueB3, setValueR3, setValueG3, setValueB3);
 
 
   return (
@@ -157,8 +172,7 @@ function App() {
     
             <Box direction='row' flex >
               <Box flex align='center' justify='center'>
-                <Text>{ color1.r }, { color1.g }, { color1.b }</Text>
-                <Palette color1={color1} />
+                <Palette color1={color1} color2={color2} color3={color3} />
               </Box>
               {size !== 'small' && (
                 <Collapsible direction="horizontal" open={showSidebar}>
