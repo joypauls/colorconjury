@@ -14,6 +14,7 @@ import {
   RangeInput
 } from 'grommet';
 import { FormClose, Notification, Configure } from 'grommet-icons';
+import Slider from "rc-slider";
 // import Typography from '@material-ui/core/Typography';
 // import Link from '@material-ui/core/Link';
 // import Container from '@material-ui/core/Container';
@@ -60,12 +61,11 @@ function Palette() {
   )
 }
 
-function SliderInput() {
-  const [value, setValue] = useState(10);
+function SliderInput(props) {
   return (
     <RangeInput
-      value={value}
-      onChange={event => setValue(event.target.value)}
+      value={props.value}
+      onChange={event => props.setValue(event.target.value)}
     />
   );
 }
@@ -87,6 +87,10 @@ const AppBar = (props) => (
 function App() {
   const [showSidebar, setShowSidebar] = useState(false);
 
+  const [valueR, setValueR] = useState(10);
+  const [valueG, setValueG] = useState(10);
+  const [valueB, setValueB] = useState(10);
+
   return (
     <Grommet theme={theme} full>
 
@@ -101,19 +105,22 @@ function App() {
     
     <Box direction='row' flex overflow={{ horizontal: 'hidden' }}>
       <Box flex align='center' justify='center'>
+      <Text>{ valueR }, { valueG }, { valueB }</Text>
         <Palette/>
-       app body
       </Box>
         <Collapsible direction="horizontal" open={showSidebar}>
            <Box
            flex
              width='medium'
+             pad="small"
              background='light-2'
              elevation='small'
              align='center'
              justify='center'
            >
-             sidebar
+             <SliderInput value={valueR} setValue={setValueR} />
+             <SliderInput value={valueG} setValue={setValueG} />
+             <SliderInput value={valueB} setValue={setValueB} />
            </Box>
            </Collapsible>
     </Box>
