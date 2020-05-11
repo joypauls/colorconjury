@@ -14,10 +14,11 @@ import {
   RangeInput
 } from 'grommet';
 import { FormClose, Notification, Configure } from 'grommet-icons';
-import Slider from "rc-slider";
-// import Typography from '@material-ui/core/Typography';
-// import Link from '@material-ui/core/Link';
-// import Container from '@material-ui/core/Container';
+
+import 'rc-slider/assets/index.css';
+import 'rc-tooltip/assets/bootstrap.css';
+import Tooltip from 'rc-tooltip';
+import Slider from 'rc-slider';
 
 // import AppMenu from './components/AppMenu'
 // import Palette from './components/Palette'
@@ -91,13 +92,7 @@ function Palette(props) {
 
 function SliderInput(props) {
   return (
-    <RangeInput
-      min={0}
-      max={255}
-      step={1}
-      value={props.value}
-      onChange={event => props.setValue(event.target.value)}
-    />
+    <Slider min={0} max={255} step={1} value={props.value} onChange={val => props.setValue(val)} />
   );
 }
 
@@ -144,15 +139,15 @@ function App() {
 
   const color1 = new Color(valueR, valueG, valueB, setValueR, setValueG, setValueB);
 
-  const [valueR2, setValueR2] = useState(146);
-  const [valueG2, setValueG2] = useState(255);
-  const [valueB2, setValueB2] = useState(217);
+  const [valueR2, setValueR2] = useState(255);
+  const [valueG2, setValueG2] = useState(169);
+  const [valueB2, setValueB2] = useState(238);
 
   const color2 = new Color(valueR2, valueG2, valueB2, setValueR2, setValueG2, setValueB2);
 
-  const [valueR3, setValueR3] = useState(255);
-  const [valueG3, setValueG3] = useState(169);
-  const [valueB3, setValueB3] = useState(238);
+  const [valueR3, setValueR3] = useState(240);
+  const [valueG3, setValueG3] = useState(255);
+  const [valueB3, setValueB3] = useState(69);
 
   const color3 = new Color(valueR3, valueG3, valueB3, setValueR3, setValueG3, setValueB3);
 
