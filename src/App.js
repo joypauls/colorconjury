@@ -70,8 +70,17 @@ function PaletteElement(props) {
         <SliderInput value={props.color.g} setValue={props.color.setG} label="g" />
         <SliderInput value={props.color.b} setValue={props.color.setB} label="b" />
       </Box>
-      <Box elevation="medium" background={makeRGBString(props.color.r, props.color.g, props.color.b)} width="medium" height="medium">
+      <Box 
+        elevation="medium" 
+        background={makeRGBString(props.color.r, props.color.g, props.color.b)} 
+        width="medium" 
+        height="medium" 
+        direction="row" 
+        justify="between"
+        pad="xsmall"
+      >
         <Text size="small">({ props.color.r }, { props.color.g }, { props.color.b })</Text>
+        <Text size="small">{ makeHexString(props.color.r, props.color.g, props.color.b) }</Text>
       </Box>
     </Box>
   )
@@ -118,6 +127,12 @@ class Color {
 function makeRGBString(r, g, b) {
   return (
     `rgb(${r},${g},${b})`
+  );
+}
+
+function makeHexString(r, g, b) {
+  return (
+    `#${r.toString(16).toUpperCase()}${g.toString(16).toUpperCase()}${b.toString(16).toUpperCase()}`
   );
 }
 
