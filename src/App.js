@@ -1,5 +1,6 @@
 import React, { useState, Component } from "react";
 import './App.css';
+import './overrides.css';
 import {
   Box,
   Button,
@@ -64,9 +65,11 @@ function MadeWithLove() {
 function PaletteElement(props) {
   return (
     <Box>
-      <SliderInput value={props.color.r} setValue={props.color.setR} />
-      <SliderInput value={props.color.g} setValue={props.color.setG} />
-      <SliderInput value={props.color.b} setValue={props.color.setB} />
+      <Box pad="small">
+        <SliderInput value={props.color.r} setValue={props.color.setR} label="r" />
+        <SliderInput value={props.color.g} setValue={props.color.setG} label="g" />
+        <SliderInput value={props.color.b} setValue={props.color.setB} label="b" />
+      </Box>
       <Box elevation="medium" background={makeRGBString(props.color.r, props.color.g, props.color.b)} width="medium" height="medium">
         <Text size="small">({ props.color.r }, { props.color.g }, { props.color.b })</Text>
       </Box>
@@ -92,7 +95,10 @@ function Palette(props) {
 
 function SliderInput(props) {
   return (
-    <Slider min={0} max={255} step={1} value={props.value} onChange={val => props.setValue(val)} />
+    <Box direction="row" align="center">
+      <Text style={{marginRight: "1rem"}}>{props.label}</Text>
+      <Slider min={0} max={255} step={1} value={props.value} onChange={val => props.setValue(val)} />
+    </Box> 
   );
 }
 
@@ -159,10 +165,10 @@ function App() {
           <Box fill>
             <AppBar>
               <Heading level='4' margin='none'>color & conjury &#128302;</Heading>
-              <Button
+              {/* <Button
                 icon={<Configure />}
                 onClick={() => setShowSidebar(!showSidebar)}
-              />
+              /> */}
             </AppBar>
     
             <Box direction='row' flex >
