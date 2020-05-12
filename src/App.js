@@ -85,17 +85,26 @@ function PaletteElement(props) {
     });
   }
 
+  const handleLChannel = val => {
+    props.setColor({
+      r: adjustLight(props.color.r, val),
+      g: adjustLight(props.color.g, val),
+      b: adjustLight(props.color.b, val),
+      l: val
+    });
+  }
+
   return (
     <Box>
       <Box pad="small">
         <SliderInput min={0} max={255} step={1} value={props.color.r} setValue={handleRChannel} label="r" />
         <SliderInput min={0} max={255} step={1} value={props.color.g} setValue={handleGChannel} label="g" />
         <SliderInput min={0} max={255} step={1} value={props.color.b} setValue={handleBChannel} label="b" />
-        {/* <SliderInput min={0.5} max={1.5} step={0.01} value={props.color.l} setValue={props.color.setL} label="l" /> */}
+        <SliderInput min={0.5} max={1.5} step={0.01} value={props.color.l} setValue={handleLChannel} label="l" />
       </Box>
       <Box 
         elevation="medium" 
-        background={makeRGBString(props.color.r, props.color.g, props.color.b)} 
+        background={ makeRGBString(props.color.r, props.color.g, props.color.b) } 
         width="medium" 
         height="medium" 
         direction="row" 
@@ -141,6 +150,10 @@ function clip(x, low, high) {
   );
 }
 
+function adjustLight(channel, l) {
+  return ( clip(Math.floor(channel * l), 0, 255) );
+}
+
 // class Color {
 //   constructor(r, g, b, setR, setG, setB) {
 //     this.r = r;
@@ -165,10 +178,15 @@ function makeColor(r, g, b) {
   var color = {
     r: r,
     g: g,
-    b: b
+    b: b,
+    l: 1
   };
   return(color);
 }
+
+// function adjustBrightness(color, k) {
+  
+// }
 
 
 function makeRGBString(r, g, b) {
@@ -181,10 +199,6 @@ function makeHexString(r, g, b) {
   return (
     `#${r.toString(16).toUpperCase()}${g.toString(16).toUpperCase()}${b.toString(16).toUpperCase()}`
   );
-}
-
-function adjustBrightness(color, k) {
-  
 }
 
 
