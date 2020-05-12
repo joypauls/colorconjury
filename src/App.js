@@ -67,30 +67,37 @@ function PaletteElement(props) {
   const handleRChannel = val => {
     props.setColor({
       ...props.color, 
-      r: val
+      r: val,
+      l: clipChannel((props.color.r + props.color.g + props.color.b) / 3)
     });
   }
 
   const handleGChannel = val => {
     props.setColor({
       ...props.color, 
-      g: val
+      g: val,
+      l: clipChannel((props.color.r + props.color.g + props.color.b) / 3)
     });
   }
 
   const handleBChannel = val => {
     props.setColor({
       ...props.color, 
-      b: val
+      b: val,
+      l: clipChannel((props.color.r + props.color.g + props.color.b) / 3)
     });
   }
 
   const handleLChannel = val => {
+    // props.setColor({
+    //   r: clipChannel(props.color.r * val),
+    //   g: clipChannel(props.color.g * val),
+    //   b: clipChannel(props.color.b * val),
+    //   l:  clipChannel((props.color.r + props.color.g + props.color.b) / 3)
+    // });
     props.setColor({
-      r: adjustLight(props.color.r, val),
-      g: adjustLight(props.color.g, val),
-      b: adjustLight(props.color.b, val),
-      l: val
+      ...props.color, 
+      l: clipChannel((props.color.r + props.color.g + props.color.b) / 3)
     });
   }
 
@@ -100,7 +107,7 @@ function PaletteElement(props) {
         <SliderInput min={0} max={255} step={1} value={props.color.r} setValue={handleRChannel} label="r" />
         <SliderInput min={0} max={255} step={1} value={props.color.g} setValue={handleGChannel} label="g" />
         <SliderInput min={0} max={255} step={1} value={props.color.b} setValue={handleBChannel} label="b" />
-        <SliderInput min={0.5} max={1.5} step={0.01} value={props.color.l} setValue={handleLChannel} label="l" />
+        <SliderInput min={0} max={255} step={1} value={props.color.l} setValue={handleLChannel} label="l" />
       </Box>
       <Box 
         elevation="medium" 
@@ -150,8 +157,8 @@ function clip(x, low, high) {
   );
 }
 
-function adjustLight(channel, l) {
-  return ( clip(Math.floor(channel * l), 0, 255) );
+function clipChannel(channel) {
+  return ( clip(Math.floor(channel), 0, 255) );
 }
 
 // class Color {
@@ -179,7 +186,7 @@ function makeColor(r, g, b) {
     r: r,
     g: g,
     b: b,
-    l: 1
+    l: clipChannel((r + g + b) / 3)
   };
   return(color);
 }
